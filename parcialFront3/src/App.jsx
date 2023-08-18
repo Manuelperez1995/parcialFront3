@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import Card from Card;
+import React, { useState } from 'react';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  //Aqui deberias agregar los estados y los handlers para los inputs
+  
+  const [nombre, setNombre] = useState('');
+  const [colorFavorito, setColorFavorito] = useState('');
+  const [card, setCard] = useState(false);
+
+
+  const handleNombreChange = (event) => {
+    setNombre(event.target.value);
+  };
+
+  const handleColorChange = (event) => {
+    setColorFavorito(event.target.value);
+  };
+
+  const handleFormSubmit = () => {
+    if (nombre && colorFavorito) {
+      setCard(true);
+    } else {
+      alert('Por favor, ingresa nombre y color favorito');
+    }
+  };
 
   return (
-    <>
+    <div>
+      <h1>Card</h1>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <input type="text" placeholder="Nombre" value={nombre} onChange={handleNombreChange} />
+        <input type="text" placeholder="Color Favorito" value={colorFavorito} onChange={handleColorChange} />
+        <button onClick={handleFormSubmit}>Enviar</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      {card && <Card nombre={nombre} color={colorFavorito} />}
+    </div>
+  );
+};
+ 
 
-export default App
+  return (
+    <div className="App">
+      <h1>Elige un color</h1>
+      <form>
+        <div>
+          <input type="text" placeholder="Nombre:" />
+          <input type="text" placeholder="Color favorito:" />
+          <button>Enviar</button>
+        </div>
+      </form>
+    </div>
+  );
+
+export default App;
+
